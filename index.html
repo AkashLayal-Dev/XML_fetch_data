@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>XML-Jquery</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+
+    <!-- **************************************************************************************** 
+        !   connect your main.js script to hmtl                                                     *
+        !   add version of jquery                                                                   *
+        ! *************************************************************************************** -->
+    <script
+      type="text/javascript"
+      src="//code.jquery.com/jquery-1.11.3.min.js"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <style>
+      ul {
+        list-style: none;
+        display: grid;
+
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      }
+      li {
+        font-size: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="jumbotron" style="text-align: center">
+        <h1 id="headerTitle">Student Data List</h1>
+        <button onclick=" showDetails()">Show Student Details</button>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="reg">Reg. No</th>
+            <th scope="col" class="name">Student Name</th>
+            <th scope="col" class="branch">Branch Name</th>
+            <th scope="col" class="semester">Semester</th>
+            <th scope="col" class="course">Course</th>
+          </tr>
+        </thead>
+        <tbody id="TABLE"></tbody>
+      </table>
+      <ul></ul>
+    </div>
+
+    <script>
+      // Do some stuff when page hmtl page is launched
+      $(document).ready(function () {
+        $("#headerTitle").hide(300).show(1500);
+        // calling show food menu function
+        showDetails();
+
+        // If you want to fetch data from the file
+        // call fetch data function instead of showDetails
+        // fetchData()
+      });
+
+      // ***************************************************************************************
+      // this function calls showDetails 3000 milisecond to get new changes                   *
+      // made on demo.xml                                                                      *
+      // ***************************************************************************************
+      function fetchData() {
+        setTimeout(function () {
+          showDetails();
+          // recursive call
+          fetchData();
+        }, 3000);
+      }
+
+      // **************************************************************************************
+      // read data from demo.xml using Jquery | AJAX                                          *
+      // **************************************************************************************
+      function showDetails() {
+        $.ajax({
+          type: "GET",
+          url: "./student.xml",
+          dataType: "xml",
+
+          error: function (e) {
+            alert("An error occurred while processing XML file");
+            console.log("XML reading Failed: ", e);
+          },
+
+          success: function (response) {
+            // make sure the ul is empty
+            // before appending data inot it
+            $("ul").children().remove();
+
+            $(response)
+              .find("student")
+              .each(function () {
+                var reg = $(this).find("registration_no").text();
+                var name = $(this).find("name").text();
+                var branch = $(this).find("branch").text();
+                var semester = $(this).find("semester").text();
+                var course = $(this).find("course").text();
+
+                // add content to the HTML
+                var table = document.getElementById("TABLE");
+                var row = table.insertRow(0);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                var cell5 = row.insertCell(4);
+                cell1.innerHTML = reg;
+                cell2.innerHTML = name;
+                cell3.innerHTML = branch;
+                cell4.innerHTML = semester;
+                cell5.innerHTML = course;
+
+                // $("ul").append("<li>" + reg + "</li>");
+                // $("ul").append("<li>" + name + "</li>");
+                // $("ul").append("<li>" + branch + "</li>");
+                // $("ul").append("<li>" + semester + "</li>");
+                // $("ul").append("<li>" + course + "</li>");
+              });
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<!-- ****************************************** END ***************************************** -->

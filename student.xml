@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<studentdetails> 
+   <student> 
+      <registration_no>1001</registration_no>
+      <name>Ajay</name> 
+      <branch>Jaipur</branch> 
+      <semester>I</semester> 
+      <course>BCA</course> 
+   </student> 
+   <student>
+	<registration_no>1002</registration_no> 
+      <name>Rahul</name> 
+      <branch>Jaipur</branch> 
+      <semester>I</semester> 
+      <course>MCA</course> 
+   </student> 
+   <student>
+  <registration_no>1003</registration_no> 
+      <name>Sachin</name> 
+      <branch>Jaipur</branch> 
+      <semester>II</semester>
+      <course>MCA</course> 
+   </student> 
+<student>
+  <registration_no>1004</registration_no>  
+      <name>Sandeep</name> 
+      <branch>Jaipur</branch> 
+      <semester>II</semester> 
+      <course>MCA</course> 
+   </student> 
+   <student>
+  <registration_no>1005</registration_no> 
+      <name>Suresh</name> 
+      <branch>Jaipur</branch> 
+      <semester>II</semester> 
+      <course>MCA</course> 
+   </student> 
+   </studentdetails>
